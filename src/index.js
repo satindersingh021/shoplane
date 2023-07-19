@@ -16,7 +16,7 @@ root.render(
     </Provider>
   </React.StrictMode>
   //   <React.StrictMode>
-  //     <App />
+  //     <Apps />
   //   </React.StrictMode>
   // );
   // root.render(

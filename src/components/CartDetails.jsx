@@ -21,36 +21,40 @@ function CartDetails() {
 
   return (
     <div>
-      {state.cart.map((item) => (
-        <div className="card mb-3" style={{ maxWidth: "540px;" }}>
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img
-                src={item.image}
-                className="img-fluid rounded-start"
-                alt="..."
-              />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title display-5">{item.title}</h5>
-                <p className="card-text">{item.description}</p>
-                <h3 className="card-text text-danger">
-                  &#8377;
-                  {item.price} X {item.quantity}(Qty) = &#8377;
-                  {item.price * item.quantity}
-                </h3>
-                <button
-                  className="btn btn-primary"
-                  onClick={cartDeleteHandler(item)}
-                >
-                  Delete Item
-                </button>
+      {state.cart.length === 0 ? (
+        <h1 className="text-center">Cart is Empty&#128580;</h1>
+      ) : (
+        state.cart.map((item) => (
+          <div className="card mb-3" style={{ maxWidth: "540px;" }}>
+            <div className="row g-0">
+              <div className="col-md-4">
+                <img
+                  src={item.image}
+                  className="img-fluid rounded-start"
+                  alt="..."
+                />
+              </div>
+              <div className="col-md-8">
+                <div className="card-body">
+                  <h5 className="card-title display-5">{item.title}</h5>
+                  <p className="card-text">{item.description}</p>
+                  <h3 className="card-text text-danger">
+                    &#8377;
+                    {item.price} X {item.quantity}(Qty) = &#8377;
+                    {item.price * item.quantity}
+                  </h3>
+                  <button
+                    className="btn btn-primary"
+                    onClick={cartDeleteHandler(item)}
+                  >
+                    Delete Item
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 }

@@ -28,26 +28,14 @@ const CategoryList = () => {
           <Link
             className="nav-link"
             aria-current="page"
-            to={"/wishlist"}
-            style={{ textTransform: "uppercase", paddingRight: "100px" }}
-          >
-            WISHLIST
-          </Link>
-          <Link
-            className="nav-link"
-            aria-current="page"
-            to={"/cart"}
-            style={{ textTransform: "uppercase", paddingRight: "100px" }}
-          >
-            CART
-          </Link>
-          <Link
-            className="nav-link"
-            aria-current="page"
             to={"/"}
-            style={{ textTransform: "uppercase", paddingRight: "100px" }}
+            style={{
+              textTransform: "uppercase",
+              paddingRight: "70px",
+              color: "black",
+            }}
           >
-            ALL
+            <strong>ALL</strong>
           </Link>
         </li>
         {Category.map((category) => (
@@ -56,9 +44,13 @@ const CategoryList = () => {
               className="nav-link active"
               aria-current="page"
               to={"/category/" + category}
-              style={{ textTransform: "uppercase", paddingRight: "100px" }}
+              style={{
+                textTransform: "uppercase",
+                paddingRight: "70px",
+                color: "black",
+              }}
             >
-              {category}
+              <strong>{category}</strong>
             </Link>
           </li>
         ))}

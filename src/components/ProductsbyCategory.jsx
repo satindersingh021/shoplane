@@ -45,32 +45,59 @@ const ProductsbyCategory = () => {
             <div className="col-md-3">
               <div className="card">
                 <div className="card-body">
-                  <Link to={"/product/" + product.id}>
+                  <Link className="nav-link" to={"/product/" + product.id}>
                     <img
                       src={product.image}
                       className="card-img-top"
                       alt="..."
+                      style={{ width: "100%", height: 300 }}
                     />
-                    <h5 className="card-title">{product.title}</h5>
+                    <h5
+                      className="card-title"
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        paddingBottom: 10,
+                      }}
+                    >
+                      {product.title}
+                    </h5>
                   </Link>
                   <p className="card-text">
-                    {product.rating.rate}({product.rating.count})
+                    {product.rating.rate}
+                    <i className="bi bi-star-fill text-warning"></i>
+                    &nbsp;&nbsp;(
+                    {product.rating.count})
                   </p>
-                  <p className="card-text">{product.price}</p>
-                  <Link
-                    className="btn btn-primary"
-                    onClick={onClickHandler(product)}
-                  >
-                    Add to Cart
-                  </Link>
-                  <Link
-                    className="btn btn-primary"
-                    onClick={wishlistHandler(product)}
-                  >
-                    Add to Wishlist
-                  </Link>
+                  <h3 className="card-text text-secondary">
+                    &#8377;{product.price}
+                  </h3>
+                  <div className="d-grid gap-2">
+                    <Link
+                      className="btn btn-primary btn-lg"
+                      onClick={onClickHandler(product)}
+                    >
+                      <i
+                        className="bi bi-cart"
+                        style={{ fontSize: 20, marginRight: 15 }}
+                      ></i>
+                      Add to Cart
+                    </Link>
+                    <Link
+                      className="btn btn-outline-danger btn-lg"
+                      onClick={wishlistHandler(product)}
+                    >
+                      <i
+                        className="bi bi-heart"
+                        style={{ fontSize: 20, marginRight: 15 }}
+                      ></i>
+                      Add to Wishlist
+                    </Link>
+                  </div>
                 </div>
               </div>
+              <br />
             </div>
           ))}
         </div>

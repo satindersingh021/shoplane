@@ -39,6 +39,12 @@ function ProductDescription() {
     <div>
       <div className="container">
         <Navbar />
+        <div
+          className="container-fluid "
+          style={{ borderRadius: 15, backgroundColor: "#e7fafe" }}
+        >
+          <h1 className="display-4 text-center">Product Description</h1>
+        </div>
         <div className="wrapper">
           <div className="row">
             <div className="col-md-6">
@@ -49,8 +55,8 @@ function ProductDescription() {
               <br />
               <p className="lead">{product.description}</p>
               <br />
-              {/* <p>{product.rating.count}</p> */}
-              <h2 className="display-5">
+              {/* <p>{rating}</p> */}
+              <h2 className="display-5 text-secondary">
                 <span>&#8377;</span>
                 {product.price}
               </h2>
@@ -64,7 +70,7 @@ function ProductDescription() {
                 Add to Cart
               </button>
               <button
-                className="btn btn-primary btn-lg"
+                className="btn btn-outline-danger btn-lg"
                 onClick={wishlistHandler}
               >
                 <span style={{ marginRight: 10 }} class="bi bi-heart"></span>

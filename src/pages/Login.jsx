@@ -109,7 +109,7 @@ function Login() {
                     </div>
                     <p className="text-center">
                       Don't have an account? Sign Up &nbsp;
-                      <Link to="/register">here</Link>
+                      <Link to="/signup">here</Link>
                     </p>
                     <div className="d-grid gap-2">
                       <input

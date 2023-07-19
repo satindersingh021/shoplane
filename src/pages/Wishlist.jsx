@@ -24,36 +24,81 @@ function Wishlist() {
   return (
     <div className="container">
       <Navbar />
-      <div className="row">
-        {state.wishlist.map((product) => (
-          <div className="col-md-3">
-            <div className="card">
-              <div className="card-body">
-                <Link to={"/product/" + product.id}>
-                  <img src={product.image} className="card-img-top" alt="..." />
-                  <h5 className="card-title">{product.title}</h5>
-                </Link>
-                <p className="card-text">
-                  {product.rating.rate}({product.rating.count})
-                </p>
-                <p className="card-text">{product.price}</p>
-                <Link
-                  className="btn btn-primary"
-                  onClick={onClickHandler(product)}
-                >
-                  Add to Cart
-                </Link>
-                <Link
-                  className="btn btn-primary"
-                  onClick={wishlistHandler(product)}
-                >
-                  Remove from Wishlist
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
+      <div
+        className="container-fluid "
+        style={{ borderRadius: 15, backgroundColor: "#e7fafe" }}
+      >
+        <h1 className="display-4 text-center">Wishlist</h1>
       </div>
+      <br />
+
+      {state.wishlist.length === 0 ? (
+        <div>
+          <h1 className="text-center">Your Wishlist is Empty&#128517;</h1>
+        </div>
+      ) : (
+        <div className="row">
+          {state.wishlist.map((product) => (
+            <div className="col-md-3">
+              <div className="card">
+                <div className="card-body">
+                  <Link className="nav-link" to={"/product/" + product.id}>
+                    <img
+                      src={product.image}
+                      className="card-img-top"
+                      alt="..."
+                      style={{ width: "100%", height: 300 }}
+                    />
+                    <h5
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        paddingBottom: 10,
+                      }}
+                      className="card-title"
+                    >
+                      {product.title}
+                    </h5>
+                  </Link>
+                  <p className="card-text">
+                    {product.rating.rate}
+                    <i className="bi bi-star-fill text-warning"></i>
+                    &nbsp;&nbsp;(
+                    {product.rating.count})
+                  </p>
+                  <h3 className="card-text text-secondary">
+                    &#8377;{product.price}
+                  </h3>
+                  <div className="d-grid gap-2">
+                    <Link
+                      className="btn btn-primary btn-lg"
+                      onClick={onClickHandler(product)}
+                    >
+                      <i
+                        className="bi bi-cart"
+                        style={{ fontSize: 20, marginRight: 15 }}
+                      ></i>
+                      Add to Cart
+                    </Link>
+                    <Link
+                      className="btn btn-lg text-bg-danger"
+                      onClick={wishlistHandler(product)}
+                    >
+                      <i
+                        className="bi bi-heart"
+                        style={{ fontSize: 20, marginRight: 15 }}
+                      ></i>
+                      Remove from Wishlist
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <br />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

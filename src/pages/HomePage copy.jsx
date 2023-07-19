@@ -11,14 +11,10 @@ import store from "../redux/store";
 function HomePage() {
   const [products, getProducts] = useState([]);
   const dispatch = useDispatch();
-  // const state = store.getState();
+  const state = store.getState();
 
-  // console.log(state.wishlist);
-  // const [isLiked, getLiked] = useState("bi bi-heart text-danger");
-
-  // const likedData = () => {
-  //   isLiked = store.wishlist;
-  // };
+  console.log(state.wishlist);
+  // const [isLiked, getLiked] = useState(state);
 
   const fetchData = () => {
     axios
@@ -40,20 +36,9 @@ function HomePage() {
   });
 
   const wishlistHandler = useCallback((product) => () => {
+    console.log(` Product Data - ${product.id}`);
     dispatch(addToWishlist(product));
   });
-
-  // const wishlisttick = useCallback((id) => () => {
-  //   state.wishlist.map((items) => {
-  //     if (items.id === id) {
-  //       getLiked(true);
-  //       console.log("done");
-  //     } else {
-  //       getLiked(false);
-  //       console.log("sorry");
-  //     }
-  //   });
-  // });
 
   return (
     <div>
@@ -64,17 +49,25 @@ function HomePage() {
             <div className="col-md-3">
               <div className="card">
                 <div className="card-body">
-                  {/* <Link onClick={wishlistHandler(product)}>
-                    <span className="d-flex justify-content-end">
-                      <i
-                        onClick={() => getLiked(product)}
-                        className={`bi bi-heart text-danger ${
-                          isLiked == product && "bi-heart-fill"
-                        }`}
-                        style={{ fontSize: "25px", marginRight: "15px" }}
-                      ></i>
-                    </span>
-                  </Link> */}
+                  <Link onClick={wishlistHandler(product)}>
+                    {state.wishlist.map((items) => {
+                      items.isLiked ? (
+                        <span class="d-flex justify-content-end">
+                          <i
+                            className="bi bi-heart-fill text-danger"
+                            style={{ fontSize: "25px", marginRight: "15px" }}
+                          ></i>
+                        </span>
+                      ) : (
+                        <span class="d-flex justify-content-end">
+                          <i
+                            className="bi bi-heart text-danger"
+                            style={{ fontSize: "25px", marginRight: "15px" }}
+                          ></i>
+                        </span>
+                      );
+                    })}
+                  </Link>
                   <Link to={"/product/" + product.id}>
                     <img
                       src={product.image}
@@ -92,12 +85,6 @@ function HomePage() {
                     onClick={onClickHandler(product)}
                   >
                     Add to Cart
-                  </Link>
-                  <Link
-                    className="btn btn-primary"
-                    onClick={wishlistHandler(product)}
-                  >
-                    Add to Wishlist
                   </Link>
                 </div>
               </div>

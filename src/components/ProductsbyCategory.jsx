@@ -1,30 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
 import Endpoints from "../api/endpoints";
+import { useParams } from "react-router";
+import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/actions/cart-action";
 import { addToWishlist } from "../redux/actions/wishlist-action";
-import store from "../redux/store";
 
-function HomePage() {
-  const [products, getProducts] = useState([]);
+const ProductsbyCategory = () => {
+  const [productsByCategory, getProductsByCategory] = useState([]);
+  const { title } = useParams();
   const dispatch = useDispatch();
-  // const state = store.getState();
-
-  // console.log(state.wishlist);
-  // const [isLiked, getLiked] = useState("bi bi-heart text-danger");
-
-  // const likedData = () => {
-  //   isLiked = store.wishlist;
-  // };
 
   const fetchData = () => {
     axios
-      .get(Endpoints.ALL_PRODUCTS)
+      .get(Endpoints.PRODUCTS_IN_CATEGORY + title)
       .then((response) => {
-        getProducts(response.data);
+        getProductsByCategory(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -43,38 +36,15 @@ function HomePage() {
     dispatch(addToWishlist(product));
   });
 
-  // const wishlisttick = useCallback((id) => () => {
-  //   state.wishlist.map((items) => {
-  //     if (items.id === id) {
-  //       getLiked(true);
-  //       console.log("done");
-  //     } else {
-  //       getLiked(false);
-  //       console.log("sorry");
-  //     }
-  //   });
-  // });
-
   return (
     <div>
       <div className="container">
         <Navbar />
         <div className="row">
-          {products.map((product) => (
+          {productsByCategory.map((product) => (
             <div className="col-md-3">
               <div className="card">
                 <div className="card-body">
-                  {/* <Link onClick={wishlistHandler(product)}>
-                    <span className="d-flex justify-content-end">
-                      <i
-                        onClick={() => getLiked(product)}
-                        className={`bi bi-heart text-danger ${
-                          isLiked == product && "bi-heart-fill"
-                        }`}
-                        style={{ fontSize: "25px", marginRight: "15px" }}
-                      ></i>
-                    </span>
-                  </Link> */}
                   <Link to={"/product/" + product.id}>
                     <img
                       src={product.image}
@@ -107,6 +77,6 @@ function HomePage() {
       </div>
     </div>
   );
-}
+};
 
-export default HomePage;
+export default ProductsbyCategory;

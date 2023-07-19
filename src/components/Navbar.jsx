@@ -72,7 +72,7 @@ function Navbar() {
               {loginStatus ? (
                 <Link
                   onClick={onLogoutHandler}
-                  className="btn btn-outline-danger"
+                  className="btn btn-danger"
                 >
                   Logout
                 </Link>

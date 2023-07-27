@@ -7,11 +7,14 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/actions/cart-action";
 import { addToWishlist } from "../redux/actions/wishlist-action";
+import store from "../redux/store";
 
 const ProductsbyCategory = () => {
   const [productsByCategory, getProductsByCategory] = useState([]);
   const { title } = useParams();
   const dispatch = useDispatch();
+
+  const state = store.getState();
 
   const fetchData = () => {
     axios
@@ -45,6 +48,23 @@ const ProductsbyCategory = () => {
             <div className="col-md-3">
               <div className="card">
                 <div className="card-body">
+                  <div className=" text-end">
+                    <span className="wish-icon">
+                      <Link>
+                        <i
+                          className={
+                            state.wishlist.some(
+                              (wish) => wish.id === product.id
+                            )
+                              ? "bi bi-heart-fill text-danger"
+                              : "bi bi-heart text-dark"
+                          }
+                          onClick={wishlistHandler(product)}
+                          style={{ fontSize: 30 }}
+                        ></i>
+                      </Link>
+                    </span>
+                  </div>
                   <Link className="nav-link" to={"/product/" + product.id}>
                     <img
                       src={product.image}
@@ -85,14 +105,20 @@ const ProductsbyCategory = () => {
                       Add to Cart
                     </Link>
                     <Link
-                      className="btn btn-outline-danger btn-lg"
+                      className={
+                        state.wishlist.some((wish) => wish.id === product.id)
+                          ? "btn btn-outline-danger btn-lg"
+                          : "btn btn-outline-dark btn-lg"
+                      }
                       onClick={wishlistHandler(product)}
                     >
                       <i
-                        className="bi bi-heart"
+                        className="bi bi-heart-fill"
                         style={{ fontSize: 20, marginRight: 15 }}
                       ></i>
-                      Add to Wishlist
+                      {state.wishlist.some((wish) => wish.id === product.id)
+                        ? "Remove from Wishlist"
+                        : "Add to Wishlist"}
                     </Link>
                   </div>
                 </div>

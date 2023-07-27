@@ -2,21 +2,20 @@ import { useDispatch } from "react-redux";
 import store from "../redux/store";
 import Navbar from "./Navbar";
 import { deleteFromCart } from "../redux/actions/cart-action";
-import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function CartDetails() {
   const state = store.getState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [cartSummary, getCartSummary] = useState();
+  // const [cartSummary, getCartSummary] = useState();
+
+  // useEffect(() => {}, [state]);
 
   const cartDeleteHandler = (item) => () => {
     dispatch(deleteFromCart(item));
-    getCartSummary(null);
-    navigate("/");
-    navigate("/cart");
   };
 
   return (
@@ -43,12 +42,12 @@ function CartDetails() {
                     {item.price} X {item.quantity}(Qty) = &#8377;
                     {item.price * item.quantity}
                   </h3>
-                  <button
+                  <Link
                     className="btn btn-primary"
                     onClick={cartDeleteHandler(item)}
                   >
                     Delete Item
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

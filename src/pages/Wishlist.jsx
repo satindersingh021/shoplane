@@ -17,20 +17,11 @@ function Wishlist() {
 
   const wishlistHandler = useCallback((product) => () => {
     dispatch(addToWishlist(product));
-    navigate("/");
-    navigate("/wishlist");
   });
 
   return (
     <div className="container">
       <Navbar />
-      <div
-        className="container-fluid "
-        style={{ borderRadius: 15, backgroundColor: "#e7fafe" }}
-      >
-        <h1 className="display-4 text-center">Wishlist</h1>
-      </div>
-      <br />
 
       {state.wishlist.length === 0 ? (
         <div>
@@ -42,6 +33,17 @@ function Wishlist() {
             <div className="col-md-3">
               <div className="card">
                 <div className="card-body">
+                  <div className=" text-end">
+                    <span className="wish-icon">
+                      <Link>
+                        <i
+                          className="bi bi-heart-fill text-danger "
+                          style={{ fontSize: 30 }}
+                          onClick={wishlistHandler(product)}
+                        ></i>
+                      </Link>
+                    </span>
+                  </div>
                   <Link className="nav-link" to={"/product/" + product.id}>
                     <img
                       src={product.image}

@@ -71,7 +71,20 @@ function Wishlist() {
                     {product.rating.count})
                   </p>
                   <h3 className="card-text text-secondary">
-                    &#8377;{product.price}
+                    <span>
+                      <small>&#8377;</small>
+                    </span>
+                    <span className="display-6">
+                      {Math.floor(product.price)}
+                    </span>
+                    <span>
+                      <small className="text-danger">
+                        {(
+                          (product.price - Math.floor(product.price)) *
+                          100
+                        ).toFixed()}
+                      </small>
+                    </span>
                   </h3>
                   <div className="d-grid gap-2">
                     <Link

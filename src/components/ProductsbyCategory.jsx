@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/actions/cart-action";
 import { addToWishlist } from "../redux/actions/wishlist-action";
 import store from "../redux/store";
+import Starrating from "./StarRating";
 
 const ProductsbyCategory = () => {
   const [productsByCategory, getProductsByCategory] = useState([]);
@@ -86,7 +87,7 @@ const ProductsbyCategory = () => {
                   </Link>
                   <p className="card-text">
                     {product.rating.rate}
-                    <i className="bi bi-star-fill text-warning"></i>
+                    <Starrating data={product.rating.rate} />
                     &nbsp;&nbsp;(
                     {product.rating.count})
                   </p>

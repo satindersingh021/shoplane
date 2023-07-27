@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import { addToWishlist } from "../redux/actions/wishlist-action";
 import { addToCart } from "../redux/actions/cart-action";
 import Navbar from "../components/Navbar";
+import Starrating from "../components/StarRating";
 
 function Wishlist() {
   const state = store.getState();
@@ -65,7 +66,7 @@ function Wishlist() {
                   </Link>
                   <p className="card-text">
                     {product.rating.rate}
-                    <i className="bi bi-star-fill text-warning"></i>
+                    <Starrating data={product.rating.rate} />
                     &nbsp;&nbsp;(
                     {product.rating.count})
                   </p>
